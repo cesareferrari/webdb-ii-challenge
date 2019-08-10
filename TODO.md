@@ -210,7 +210,6 @@ Add the express module:
 yarn add express
 ```
 
-
 Create index.js as the entry point of the application. index.js defines a server
 constant that imports the server from the server.js file, in the same directory.
 
@@ -224,3 +223,61 @@ server.listen(PORT, () => {
 });
 ```
 
+Create server.js
+In it create a server and set up a get route for the root of the application.
+Define a router that requires a cars-router.js file.
+Export the server at the end of the file.
+
+```
+const express = require('express');
+const server = express();
+const carsRouter = require('./routers/cars-router.js');
+
+server.use(express.json());
+server.use('/api/cars', carsRouter);
+
+server.get('/', (req, res) => {
+  res.status(200).send('<h1>Welcome to the Cars API</h1>');
+});
+
+module.exports = server;
+```
+
+Create /routers/car-router.js
+Define a new router and export it at the end of the file.
+Create a new const that points to the database and requires the db-config.js
+file with all the configurations for the database.
+
+Define all the routes in this file.
+
+```
+const express = require('express');
+const router = express.Router();
+
+const db = require('../data/db-config.js');
+
+// GET api/cars/
+router.get('/', async (req, res) => {
+  const cars = await db('cars');
+  
+  res.status(200).json(cars);
+});
+
+
+module.exports = router;
+```
+
+
+Create data/db-config.js
+This file allows the connection to the database.
+
+```
+const knex = require('knex');
+
+const configOptions = require('../knexfile.js').development;
+
+module.exports = knex(configOptions);
+```
+
+
+Test that API works with Postman.
