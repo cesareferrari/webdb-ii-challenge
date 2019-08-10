@@ -204,6 +204,13 @@ exports.seed = function(knex) {
 
 ## Create API
 
+Add the express module:
+
+```
+yarn add express
+```
+
+
 Create index.js as the entry point of the application. index.js defines a server
 constant that imports the server from the server.js file, in the same directory.
 
