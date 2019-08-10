@@ -32,5 +32,18 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// POST /api/cars/
+router.post('/', async (req, res) => {
+  const newCar = req.body;
+  try {
+    const carId = await db('cars').insert(newCar);
+    res.status(201).json({id: carId});
+  } catch (err) {
+    res.status(500).json({message: 'Database error', error: err})
+  }
+});
+
+
+
 
 module.exports = router;
