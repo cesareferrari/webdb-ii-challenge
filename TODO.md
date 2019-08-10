@@ -203,3 +203,17 @@ exports.seed = function(knex) {
 
 
 ## Create API
+
+Create index.js as the entry point of the application. index.js defines a server
+constant that imports the server from the server.js file, in the same directory.
+
+```
+const server = require('./server.js');
+
+const PORT = 5000;
+
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
+```
+
