@@ -42,7 +42,8 @@ development: {
   }
 ```
 
-Add a location for the migration files to knexfile
+Add a location for the migration files to knexfile. There is no need to create the data directory first, it will be created by knex.
+
 
 ```
 development: {
@@ -60,7 +61,8 @@ development: {
   }
 ```
 
-Add location for the seed files
+Add location for the seed files. There is no need to create the data
+directory first, it will be created by knex.
 
 ```
 development: {
@@ -98,7 +100,7 @@ exports.up = function(knex) {
     tbl.text('vin', 128).unique().notNullable();
     tbl.string('make').notNullable();
     tbl.string('model').notNullable();
-    tbl.number('mileage').notNullable();
+    tbl.integer('mileage').notNullable();
     tbl.string('transmission');
     tbl.string('title');
   });
